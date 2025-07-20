@@ -1,0 +1,9 @@
+.dotfiles
+# Auto-generated GNOME & system files
+.config/dconf/
+.config/evolution/
+.config/gtk-3.0/cache*
+.config/pulse/
+.config/systemd/user/default.target.wants/
+.config/.gsd-keyboard.settings-ported
+.config/user-dirs.*
