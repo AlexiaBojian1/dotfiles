@@ -7,3 +7,6 @@
 .config/systemd/user/default.target.wants/
 .config/.gsd-keyboard.settings-ported
 .config/user-dirs.*
+# Never track runtime/user data
+.local/share/
+.local/state/
