@@ -1,1 +1,11 @@
 .themes
+
+# desktop runtime / cache
+.config/dconf/
+.config/evolution/
+.config/gtk-3.0/
+.config/pulse/
+.config/systemd/
+.config/.gsd-keyboard.settings-ported
+.config/user-dirs.*
+
