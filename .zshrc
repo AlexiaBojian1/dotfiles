@@ -18,7 +18,7 @@ export GRB_LICENSE_FILE="/home/diego/gurobi.lic"
 # ZSH_THEME="tuxpunk"
 # ZSH_THEME="robbyrussel"
 # ZSH_THEME="dobbyrussel"
-ZSH_THEME="robbyrussell"
+ZSH_THEME="gentoo"
 # ZSH_THEME="crunch"
 # ZSH_THEME="agnoster"
 
