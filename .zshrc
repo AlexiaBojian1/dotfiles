@@ -18,7 +18,7 @@ export GRB_LICENSE_FILE="/home/diego/gurobi.lic"
 # ZSH_THEME="tuxpunk"
 # ZSH_THEME="robbyrussel"
 # ZSH_THEME="dobbyrussel"
-ZSH_THEME="cleanrussel"
+ZSH_THEME="robbyrussell"
 # ZSH_THEME="crunch"
 # ZSH_THEME="agnoster"
 
@@ -84,6 +84,7 @@ HIST_STAMPS="mm/dd/yyyy"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
+ZSH_CUSTOM="$HOME/.config/zshThemes"
 source $ZSH/oh-my-zsh.sh
 # source /usr/share/nvm/init-nvm.sh
 
@@ -149,3 +150,4 @@ bindkey '^Z' fancy-ctrl-z
 # fi
 # unset __conda_setup
 # # <<< conda initialize <<<
+alias dotgit='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
