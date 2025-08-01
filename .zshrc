@@ -151,3 +151,4 @@ bindkey '^Z' fancy-ctrl-z
 # unset __conda_setup
 # # <<< conda initialize <<<
 alias dotgit='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+alias off='systemctl poweroff'
