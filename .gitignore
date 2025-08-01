@@ -1,1 +1,11 @@
-/.config/nvim/plugged/
+# ─── Dotfiles repo: ignore caches, binaries, downloads ────────────────
+.cache/
+.local/share/          # plugin managers & app data
+.local/src/            # source checkouts you compile
+.oh-my-zsh/            # framework is huge; keep only .zshrc + themes
+Downloads/
+Pictures/
+# Ignore build outputs from suckless programs
+.local/src/*/*.o
+.local/src/*/dwm
+.local/src/*/dmenu
