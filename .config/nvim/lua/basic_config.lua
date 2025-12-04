@@ -7,9 +7,11 @@ vim.opt.shiftwidth = 4
 vim.opt.smarttab = true
 vim.opt.expandtab = true
 vim.opt.foldlevelstart = 1
+vim.opt.smartcase = true
+vim.cmd.colorscheme("tokyonight-night")
+
 
 vim.cmd ([[
-    :colorscheme modus_vivendi
     :set mouse=a
     autocmd BufWritePost,BufEnter * set nofoldenable foldmethod=manual foldlevelstart=99
 ]])

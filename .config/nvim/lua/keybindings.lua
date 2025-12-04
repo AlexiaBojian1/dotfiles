@@ -54,3 +54,12 @@ vim.keymap.set({ "i", "s" }, "<A-Tab>", function()
   return "<A-Tab>"
 end, { expr = true, noremap = true, silent = true })
 
+vim.keymap.set("n", "<Up>", "k", { noremap = true })
+vim.keymap.set("n", "<Down>", "j", { noremap = true })
+vim.keymap.set("n", "<Left>", "h", { noremap = true })
+vim.keymap.set("n", "<Right>", "l", { noremap = true })
+--move with arrows
+vim.keymap.set("i", "<Up>", "<Up>", { noremap = true })
+vim.keymap.set("i", "<Down>", "<Down>", { noremap = true })
+vim.keymap.set("i", "<Left>", "<Left>", { noremap = true })
+vim.keymap.set("i", "<Right>", "<Right>", { noremap = true })

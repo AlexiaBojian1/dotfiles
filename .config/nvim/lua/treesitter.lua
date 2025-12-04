@@ -3,7 +3,7 @@ local vim = vim
 
 local configs = require('nvim-treesitter.configs')
 configs.setup {
-	ensure_installed = { "cpp", "lua", "python", "vim", "vimdoc", "latex"},
+	ensure_installed = { "cpp", "lua", "python", "vim", "vimdoc", "latex", "rust"},
 	auto_install = true,
 	highlight = {enable = true, additional_vim_regex_highlighting = false},
 	indent = {enable = true}

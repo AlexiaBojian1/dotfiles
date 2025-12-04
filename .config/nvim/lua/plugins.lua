@@ -7,6 +7,8 @@ Plug 'miikanissi/modus-themes.nvim'
 Plug 'NvChad/nvim-colorizer.lua' -- color preview
 Plug 'kyazdani42/nvim-web-devicons' -- More Icons
 Plug 'ryanoasis/vim-devicons' -- Developer Icons
+Plug 'folke/tokyonight.nvim'
+
 
 --- Buffer and status/bottom line
 Plug('akinsho/bufferline.nvim', { ['tag'] = '*'}) -- bufferline
@@ -29,7 +31,7 @@ Plug 'tpope/vim-commentary' -- For Commenting gcc
 Plug 'sphamba/smear-cursor.nvim' -- smear animation on cursor
 Plug 'vuciv/golf' -- golf
 Plug 'MunifTanjim/nui.nvim'
-Plug 'm4xshen/hardtime.nvim'
+--Plug 'm4xshen/hardtime.nvim'
 
 --- Treesitter
 Plug('nvim-treesitter/nvim-treesitter', {['do'] = 'TSUpdate'})
@@ -74,4 +76,4 @@ require("which-key").add({
 
 require('telescope').load_extension('fzf')
 require('smear_cursor').setup()
-require("hardtime").setup({disable_mouse = false})
+--require("hardtime").setup({disable_mouse = false})
