@@ -41,7 +41,8 @@ Plug 'hrsh7th/cmp-nvim-lsp' -- plugins
 Plug 'hrsh7th/cmp-buffer' -- to go 
 Plug 'hrsh7th/cmp-path' -- with
 Plug 'hrsh7th/cmp-cmdline' -- Lsp
-
+Plug 'simrat39/rust-tools.nvim'  --for rust-tools
+Plug 'rust-lang/rust.vim' --for rust syntax
 Plug 'onsails/lspkind.nvim' -- Add pictograms to lsp
 Plug 'onsails/diaglist.nvim' -- Live lsp diagnostics in quickfix & loclist
 

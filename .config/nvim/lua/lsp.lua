@@ -181,6 +181,11 @@ require('lspconfig')['pylsp'].setup {
     on_attach = on_attach,
 }
 
+require('lspconfig')['rust_analyzer'].setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
+
 local lspkind = require('lspkind')
 cmp.setup {
   formatting = {
