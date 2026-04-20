@@ -1,0 +1,56 @@
+* {
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 13px;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(2, 2, 2, 0.85);
+    color: #ffffff;
+    border-radius: 10px;
+}
+
+/* ── Workspaces ─────────────────────────────────────── */
+#workspaces button {
+    padding: 0 8px;
+    color: #888888;
+    background: transparent;
+    border-radius: 6px;
+    margin: 4px 2px;
+    transition: all 0.2s ease;
+}
+
+#workspaces button.active {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+#workspaces button:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* ── Modules (right side) ───────────────────────────── */
+#clock,
+#cpu,
+#memory,
+#battery,
+#pulseaudio,
+#network,
+#tray {
+    padding: 0 10px;
+    color: #ffffff;
+}
+
+/* Accent colors per module */
+#clock       { color: #90DADA; }
+#cpu         { color: #A3BE8C; }
+#memory      { color: #EBCB8B; }
+#battery     { color: #A3BE8C; }
+#pulseaudio  { color: #CA509C; }
+#network     { color: #32A9A6; }
+
+#battery.warning  { color: #EBCB8B; }
+#battery.critical { color: #BB4449; }
