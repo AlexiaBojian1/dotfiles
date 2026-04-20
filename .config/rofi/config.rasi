@@ -1,0 +1,19 @@
+configuration {
+    modi:            "drun,run,filebrowser,window";
+    show-icons:      true;
+    icon-theme:      "Papirus";
+    font:            "JetBrains Mono 12";
+    case-sensitive:  false;
+    cycle:           true;
+    terminal:        "alacritty";
+
+    drun {
+        parse-user:   true;
+        parse-system: true;
+    }
+
+    timeout {
+        action: "kb-cancel";
+        delay:  0;
+    }
+}
