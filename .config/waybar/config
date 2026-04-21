@@ -67,7 +67,7 @@
 
     "custom/power": {
         "format": "⏻",
-        "on-click": "powermenu",
+        "on-click": "/home/alexia/.local/bin/powermenu",
         "tooltip": false
     }
 }
