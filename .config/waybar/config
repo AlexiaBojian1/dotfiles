@@ -9,7 +9,7 @@
 
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["cpu", "memory", "battery", "pulseaudio", "network", "tray"],
+    "modules-right": ["cpu", "memory", "battery", "pulseaudio", "network", "tray", "custom/power"],
 
     "hyprland/workspaces": {
         "format": "{id}",
@@ -19,19 +19,22 @@
 
     "clock": {
         "format": " {:%a %d %b  %H:%M}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "on-click": "alacritty -e calcurse"
     },
 
     "cpu": {
         "format": " {usage}%",
         "interval": 2,
-        "tooltip": false
+        "tooltip": false,
+        "on-click": "alacritty -e btop"
     },
 
     "memory": {
         "format": " {used:0.1f}G",
         "interval": 5,
-        "tooltip": false
+        "tooltip": false,
+        "on-click": "alacritty -e btop"
     },
 
     "battery": {
@@ -39,7 +42,8 @@
         "states": { "warning": 30, "critical": 15 },
         "format": "{icon} {capacity}%",
         "format-charging": " {capacity}%",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": ["", "", "", "", ""],
+        "on-click": "gnome-control-center power"
     },
 
     "pulseaudio": {
@@ -53,10 +57,17 @@
         "format-wifi": " {signalStrength}%",
         "format-ethernet": " {ipaddr}",
         "format-disconnected": "󰌙 off",
-        "tooltip-format": "{essid} — {ipaddr}"
+        "tooltip-format": "{essid} — {ipaddr}",
+        "on-click": "gnome-control-center wifi"
     },
 
     "tray": {
         "spacing": 8
+    },
+
+    "custom/power": {
+        "format": "⏻",
+        "on-click": "powermenu",
+        "tooltip": false
     }
 }

@@ -1,0 +1,17 @@
+#!/bin/bash
+# Power menu using rofi
+
+lock="󰌾 Lock"
+logout="󰍃 Logout"
+reboot="󰜉 Reboot"
+shutdown="󰐥 Shutdown"
+
+chosen=$(printf '%s\n' "$lock" "$logout" "$reboot" "$shutdown" \
+    | rofi -dmenu -p "Power" -theme-str 'window {width: 200px;}')
+
+case "$chosen" in
+    "$lock")     hyprlock ;;
+    "$logout")   hyprctl dispatch exit ;;
+    "$reboot")   systemctl reboot ;;
+    "$shutdown")  systemctl poweroff ;;
+esac

@@ -54,3 +54,13 @@ window#waybar {
 
 #battery.warning  { color: #EBCB8B; }
 #battery.critical { color: #BB4449; }
+
+#custom-power {
+    padding: 0 10px;
+    color: #BB4449;
+    font-size: 15px;
+}
+
+#custom-power:hover {
+    color: #ff5f5f;
+}
