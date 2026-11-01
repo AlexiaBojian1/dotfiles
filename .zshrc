@@ -42,7 +42,16 @@ zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
 # ── fzf (fuzzy finder: Ctrl+R for history, Ctrl+T for files) ──────────
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+
+# ── zsh-autosuggestions (greyed-out inline suggestion, → to accept) ────
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# ── history-substring-search (type prefix, ↑/↓ to cycle matches) ───────
+source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 # ── Cargo (Rust) ───────────────────────────────────────────────────────
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
