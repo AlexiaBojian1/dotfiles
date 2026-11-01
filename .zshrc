@@ -18,7 +18,15 @@ export VISUAL="/usr/bin/nvim"
 alias dotgit='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 alias off='systemctl poweroff'
 alias cdk='cd ~/code'
-alias ls='ls --color=auto'
+if command -v eza >/dev/null; then
+  alias ls='eza --icons --group-directories-first'
+  alias ll='eza -l --icons --git --group-directories-first'
+  alias la='eza -la --icons --git --group-directories-first'
+  alias tree='eza --tree --icons'
+else
+  alias ls='ls --color=auto'
+fi
+command -v bat >/dev/null && alias cat='bat --paging=never --style=plain'
 alias grep='grep --color=auto'
 
 # ── Fastfetch (show system info on terminal open) ──────────────────────
@@ -52,6 +60,15 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
+
+# ── fzf previews with bat / eza ────────────────────────────────────────
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=numbers --line-range=:200 {}'"
+export FZF_ALT_C_OPTS="--preview 'eza --tree --icons --level=2 {}'"
+
+# ── zoxide (z <part of dir name> to jump, zi for interactive) ─────────
+command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
 
 # ── Cargo (Rust) ───────────────────────────────────────────────────────
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
