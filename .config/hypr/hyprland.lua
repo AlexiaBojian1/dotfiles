@@ -31,6 +31,8 @@ hl.on("hyprland.start", function ()
     hl.exec_cmd("awww-daemon")
     hl.exec_cmd("awww img /home/alexia/Pictures/wallpaper-master/AutumnMounatins.jpg")
     hl.exec_cmd("/usr/lib/polkit-kde-authentication-agent-1")
+    hl.exec_cmd("wl-paste --type text --watch cliphist store")
+    hl.exec_cmd("wl-paste --type image --watch cliphist store")
 end)
 
 
@@ -185,7 +187,8 @@ hl.bind(mainMod .. " + L",         hl.dsp.exec_cmd("hyprlock"))
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("/home/alexia/.local/bin/powermenu"))
 hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exit())
 hl.bind(mainMod .. " + E",         hl.dsp.exec_cmd(fileManager))
-hl.bind(mainMod .. " + V",         hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + F",         hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + V",         hl.dsp.exec_cmd("cliphist list | rofi -dmenu -p clipboard | cliphist decode | wl-copy"))
 hl.bind(mainMod .. " + R",         hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P",         hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J",         hl.dsp.layout("togglesplit"))
@@ -210,6 +213,8 @@ hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.move({ workspace = "special:mag
 -- Screenshots (requires grim + slurp)
 hl.bind("Print",                   hl.dsp.exec_cmd("grim ~/Pictures/screenshots/$(date +%Y%m%d_%H%M%S).png"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("grim -g \"$(slurp)\" ~/Pictures/screenshots/$(date +%Y%m%d_%H%M%S).png"))
+-- Region screenshot, annotate in satty before saving
+hl.bind(mainMod .. " + SHIFT + A", hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | satty --filename - --output-filename ~/Pictures/screenshots/$(date +%Y%m%d_%H%M%S).png --copy-command wl-copy"))
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
