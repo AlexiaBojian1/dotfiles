@@ -1,62 +1,69 @@
-local Plug = vim.fn['plug#']
+local gh = function(x) return 'https://github.com/' .. x end
 
-vim.call('plug#begin', '~/.config/nvim/plugged')
+--- Build hooks (must be registered before vim.pack.add so they run on install)
+vim.api.nvim_create_autocmd('PackChanged', {
+  callback = function(ev)
+    local name, kind = ev.data.spec.name, ev.data.kind
+    if kind ~= 'install' and kind ~= 'update' then return end
+    if name == 'telescope-fzf-native.nvim' then
+      vim.system({ 'make' }, { cwd = ev.data.path }):wait()
+    elseif name == 'nvim-treesitter' then
+      if not ev.data.active then vim.cmd.packadd('nvim-treesitter') end
+      vim.cmd('TSUpdate')
+    end
+  end,
+})
 
---- Color theme, icons
-Plug 'miikanissi/modus-themes.nvim'
-Plug 'NvChad/nvim-colorizer.lua' -- color preview
-Plug 'kyazdani42/nvim-web-devicons' -- More Icons
-Plug 'ryanoasis/vim-devicons' -- Developer Icons
-Plug 'folke/tokyonight.nvim'
+vim.pack.add({
+  --- Color theme, icons
+  gh 'miikanissi/modus-themes.nvim',
+  gh 'NvChad/nvim-colorizer.lua', -- color preview
+  gh 'nvim-tree/nvim-web-devicons', -- More Icons
+  gh 'ryanoasis/vim-devicons', -- Developer Icons
+  gh 'folke/tokyonight.nvim',
 
+  --- Buffer and status/bottom line
+  { src = gh 'akinsho/bufferline.nvim', version = vim.version.range('4') }, -- bufferline
+  gh 'nvim-lualine/lualine.nvim', -- status line
 
---- Buffer and status/bottom line
-Plug('akinsho/bufferline.nvim', { ['tag'] = '*'}) -- bufferline
-Plug 'nvim-lualine/lualine.nvim' -- status line
+  --- Telescope (needs `rg` and `fd` installed on the system)
+  gh 'nvim-telescope/telescope.nvim',
+  gh 'nvim-lua/plenary.nvim', -- dependency
+  gh 'nvim-telescope/telescope-fzf-native.nvim', -- finder
+  gh 'nvim-telescope/telescope-file-browser.nvim', -- fileBrowser
 
---- Telescope
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-lua/plenary.nvim' -- dependency
-Plug 'BurntSushi/ripgrep' --  grep
-Plug 'sharkdp/fd'  --- finder
-Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'make' }) -- finder
-Plug "nvim-telescope/telescope-file-browser.nvim" -- fileBrowser
+  --- Misc
+  gh 'lewis6991/gitsigns.nvim', -- git integration
+  gh 'kdheepak/lazygit.nvim', --- lazygit integration
+  gh 'folke/which-key.nvim', -- which-key, help with mappings
+  gh 'tpope/vim-commentary', -- For Commenting gcc
+  gh 'sphamba/smear-cursor.nvim', -- smear animation on cursor
+  gh 'vuciv/golf', -- golf
+  gh 'MunifTanjim/nui.nvim',
 
+  --- Treesitter (master branch: config uses the nvim-treesitter.configs API)
+  { src = gh 'nvim-treesitter/nvim-treesitter', version = 'master' },
 
---- Misc
-Plug 'lewis6991/gitsigns.nvim' -- git integration
-Plug 'kdheepak/lazygit.nvim' --- lazygit integration
-Plug 'folke/which-key.nvim' -- which-key, help with mappings
-Plug 'tpope/vim-commentary' -- For Commenting gcc 
-Plug 'sphamba/smear-cursor.nvim' -- smear animation on cursor
-Plug 'vuciv/golf' -- golf
-Plug 'MunifTanjim/nui.nvim'
---Plug 'm4xshen/hardtime.nvim'
+  ---- LSP
+  gh 'neovim/nvim-lspconfig', -- Lsp
+  gh 'hrsh7th/nvim-cmp', -- Completion
+  gh 'hrsh7th/cmp-nvim-lsp', -- plugins
+  gh 'hrsh7th/cmp-buffer', -- to go
+  gh 'hrsh7th/cmp-path', -- with
+  gh 'hrsh7th/cmp-cmdline', -- Lsp
+  { src = gh 'mrcjkb/rustaceanvim', version = vim.version.range('9') }, -- rust (replaces rust-tools)
+  gh 'rust-lang/rust.vim', --for rust syntax
+  gh 'onsails/lspkind.nvim', -- Add pictograms to lsp
+  gh 'onsails/diaglist.nvim', -- Live lsp diagnostics in quickfix & loclist
 
---- Treesitter
-Plug('nvim-treesitter/nvim-treesitter', {['do'] = 'TSUpdate'})
+  ---- LSP Installer
+  { src = gh 'mason-org/mason.nvim', version = vim.version.range('2') }, -- lsp installer
+  { src = gh 'mason-org/mason-lspconfig.nvim', version = vim.version.range('2') },
 
----- LSP
-Plug 'neovim/nvim-lspconfig' -- Lsp
-Plug 'hrsh7th/nvim-cmp' -- Completion
-Plug 'hrsh7th/cmp-nvim-lsp' -- plugins
-Plug 'hrsh7th/cmp-buffer' -- to go 
-Plug 'hrsh7th/cmp-path' -- with
-Plug 'hrsh7th/cmp-cmdline' -- Lsp
-Plug 'simrat39/rust-tools.nvim'  --for rust-tools
-Plug 'rust-lang/rust.vim' --for rust syntax
-Plug 'onsails/lspkind.nvim' -- Add pictograms to lsp
-Plug 'onsails/diaglist.nvim' -- Live lsp diagnostics in quickfix & loclist
-
----- LSP Installer
-Plug "williamboman/mason.nvim" -- lsp installer
-Plug "williamboman/mason-lspconfig.nvim"
-
----- Snippets
-Plug 'L3MON4D3/LuaSnip'
-Plug 'saadparwaiz1/cmp_luasnip'
-
-vim.call('plug#end')
+  ---- Snippets
+  gh 'L3MON4D3/LuaSnip',
+  gh 'saadparwaiz1/cmp_luasnip',
+}, { confirm = false })
 
 require('gitsigns').setup()
 require('lualine').setup()
@@ -76,4 +83,3 @@ require("which-key").add({
 
 require('telescope').load_extension('fzf')
 require('smear_cursor').setup()
---require("hardtime").setup({disable_mouse = false})

@@ -112,8 +112,8 @@ vim.lsp.config("*", {
   capabilities = capabilities,
 })
 
--- ltex: special config (filetypes + dictionary) - same as your old setup
-vim.lsp.config("ltex", {
+-- ltex_plus (maintained ltex fork, installed via :MasonInstall ltex-ls-plus)
+vim.lsp.config("ltex_plus", {
   filetypes = { "tex", "bib", "markdown", "plaintex" },
   settings = {
     ltex = {
@@ -162,9 +162,9 @@ vim.lsp.enable({
   "clangd",        -- C / C++
   "lua_ls",        -- Lua
   "pylsp",         -- Python
-  "rust_analyzer", -- Rust
-  "ltex",          -- LaTeX
+  "ltex_plus",     -- LaTeX
 })
+-- Rust: rust-analyzer is started by rustaceanvim, don't enable it here
 
 ------------------------------------------------
 -- LSP completion formatting (icons)
