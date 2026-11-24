@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# Connect (or disconnect) the AirPods Pro over Bluetooth.
+# Usage: airpods          -> connect
+#        airpods off      -> disconnect
+#        airpods status   -> show connection state
+set -u
+
+MAC="F0:D3:1F:60:B9:02"
+
+is_connected() {
+    bluetoothctl info "$MAC" | grep -q "^\s*Connected: yes"
+}
+
+case "${1:-on}" in
+    off|disconnect)
+        bluetoothctl disconnect "$MAC" >/dev/null && echo "AirPods disconnected."
+        exit
+        ;;
+    status)
+        if is_connected; then echo "AirPods: connected"; else echo "AirPods: not connected"; fi
+        exit
+        ;;
+esac
+
+if is_connected; then
+    echo "AirPods already connected."
+    exit 0
+fi
+
+# Make sure Bluetooth is on
+rfkill unblock bluetooth 2>/dev/null
+bluetoothctl power on >/dev/null
+
+for attempt in 1 2 3; do
+    bluetoothctl connect "$MAC" >/dev/null 2>&1
+    sleep 2
+    if is_connected; then
+        echo "AirPods connected."
+        exit 0
+    fi
+    echo "Attempt $attempt failed, retrying..."
+    sleep 2
+done
+
+echo "Could not connect. Open the AirPods case near the laptop and try again." >&2
+exit 1
